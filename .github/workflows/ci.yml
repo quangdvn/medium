@@ -1,0 +1,32 @@
+name: Rails CI
+
+on: [push, pull_request]
+
+jobs:
+  CI-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.1
+      - name: Start MySql
+        run: sudo /etc/init.d/mysql start
+      - name: Install bundle
+        run: sudo gem install bundler
+      - name: Update bundle
+        run: sudo gem update bundler
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Install bundler
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: Rubocop
+        run: bundle exec rubocop -c .rubocop.yml
+      - name: Rails best practices
+        run: bundle exec rails_best_practices -e "db/schema.rb,db/migrate,vendor,app/models/application_record.rb"
