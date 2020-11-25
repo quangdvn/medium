@@ -3,7 +3,7 @@ class Api::V1::UsersController < ApiController
     @user = User.create user_create_params
 
     if @user.save
-      @token = @user.register
+      @token = JsonWebToken.encode id: @user.id, is_host: false
       render :create, status: :ok
     else
       validation_errors = @user.errors.full_messages

@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_031353) do
     t.integer "gender"
     t.integer "age"
     t.string "password_digest"
-    t.boolean "is_admin"
+    t.boolean "is_admin", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

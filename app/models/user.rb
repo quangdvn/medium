@@ -27,13 +27,13 @@ class User < ApplicationRecord
   validates :gender, presence: true, numericality: {only_integer: true},
             inclusion: {in: [1, 2]}
 
+  before_save :downcase_email
+
   has_secure_password
 
-  def check_valid attribute, token
-    if authenticated?(attribute, token)
-      "success"
-    elsif !authenticated?(attribute, token)
-      "invalid_#{attribute}"
-    end
+  private
+
+  def downcase_email
+    email.downcase!
   end
 end
