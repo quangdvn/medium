@@ -3,11 +3,8 @@ class CreateArticles < ActiveRecord::Migration[6.0]
     create_table :articles do |t|
       t.string :title
       t.text :detail
-      t.integer :gender
-      t.integer :age
-      t.string :password_digest
-      t.boolean :is_admin
       t.references :author, null: false, index: true, foreign_key: {to_table: :users}
+      t.references :category, null: false, foreign_key: true
 
       t.timestamps
     end
