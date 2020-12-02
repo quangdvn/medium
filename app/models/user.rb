@@ -5,8 +5,8 @@ class User < ApplicationRecord
   has_many :articles, foreign_key: :author_id, primary_key: :id, dependent: :destroy
 
   validates :user_name, presence: true,
-  length: {minimum: Settings.validations.user.name_minlength,
-           maximum: Settings.validations.user.name_maxlength}
+    length: {minimum: Settings.validations.user.name_minlength,
+            maximum: Settings.validations.user.name_maxlength}
 
   validates :email, presence: true,
     length: {minimum: Settings.validations.user.email_minlength,

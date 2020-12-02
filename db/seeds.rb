@@ -34,26 +34,30 @@ User.create(user_name: "Quang Huy",
   gender: 1,
   age: 22)
 
-Category.create(name: "Web")
+Category.create(name: "web")
 
-Category.create(name: "Mobile")
+Category.create(name: "mobile")
 
-Category.create(name: "AI")
+Category.create(name: "ai")
 
-Category.create(name: "Security")
+Category.create(name: "security")
 
-Category.create(name: "Networking")
+Category.create(name: "networking")
 
-Category.create(name: "DevOps")
+Category.create(name: "devops")
 
-50.times do |n|
-  title = Faker::Quote.famous_last_words
-  detail = Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10))
-  author_id = rand(1...6)
-  category_id = rand(1...6)
+# 50.times do |n|
+#   title = Faker::Quote.famous_last_words
+#   detail = Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10))
+#   author_id = rand(1...6)
+#   category_id = rand(1...6)
 
-  Article.create(title: title,
-    detail: detail,
-    author_id: author_id,
-    category_id: category_id)
-end
+#   Article.create(title: title,
+#     detail: detail,
+#     author_id: author_id,
+#     category_id: [{
+#       name: "Web"
+#     }, {
+#       name: "Rails"
+#     }])
+# end

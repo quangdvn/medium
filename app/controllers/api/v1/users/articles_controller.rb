@@ -20,7 +20,7 @@ class Api::V1::Users::ArticlesController < ApiController
 
   def create
     if @article.save
-      render json: {success: true, message: "Create successful", data: @article}, status: :ok
+      render json: {success: true, message: "Create successful", data: @article }, status: :ok
     else
       validation_errors = @article.errors.full_messages
       render json: {success: false, message: "Create fail", errors: validation_errors}, status: :ok
@@ -28,8 +28,8 @@ class Api::V1::Users::ArticlesController < ApiController
   end
 
   def update
-    if @article.update article_update_params
-      render json: {success: true, message: "Update successful", data: @article}, status: :ok
+    if update_article
+      render json: {success: true, message: "Update successful", data: @article }, status: :ok
     else
       validation_errors = @article.errors.full_messages
       render json: {success: false, message: "Update fail", errors: validation_errors}, status: :ok
@@ -46,16 +46,36 @@ class Api::V1::Users::ArticlesController < ApiController
 
   private
 
-  def article_create_params
-    params.permit Article::ARTICLE_CREATE_PARAMS
-  end
-
-  def article_update_params
-    params.permit Article::ARTICLE_UPDATE_PARAMS
+  def article_params
+    params.permit Article::ARTICLE_PARAMS
   end
 
   def new_article
-    @article = @current_user.articles.build article_create_params
+    @article = @current_user.articles.build article_params.except :categories
+    @article.categories << category_list
+  end
+
+  def update_article
+    old_categories = @article.categories
+    @article.categories = category_list
+    
+    return true if @article.update article_params.except :categories
+    
+    @article.categories = old_categories
+    return false
+  end
+
+  def category_list
+    categories = []
+    article_params["categories"].each do |item|
+      category = Category.find_by name: item["name"].downcase
+      if category
+        categories << category
+      else
+        categories << Category.new(name: item["name"].downcase)
+      end
+    end
+    categories
   end
 
   def find_article

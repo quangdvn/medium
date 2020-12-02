@@ -16,11 +16,9 @@ ActiveRecord::Schema.define(version: 2020_11_23_031353) do
     t.string "title"
     t.text "detail"
     t.bigint "author_id", null: false
-    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_articles_on_author_id"
-    t.index ["category_id"], name: "index_articles_on_category_id"
   end
 
   create_table "articles_categories", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -69,6 +67,5 @@ ActiveRecord::Schema.define(version: 2020_11_23_031353) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "articles", "categories"
   add_foreign_key "articles", "users", column: "author_id"
 end
