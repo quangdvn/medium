@@ -20,7 +20,7 @@ class Api::V1::Users::ArticlesController < ApiController
 
   def create
     if @article.save
-      render json: {success: true, message: "Create successful", data: @article }, status: :ok
+      render json: {success: true, message: "Create successful", data: @article}, status: :ok
     else
       validation_errors = @article.errors.full_messages
       render json: {success: false, message: "Create fail", errors: validation_errors}, status: :ok
@@ -29,7 +29,7 @@ class Api::V1::Users::ArticlesController < ApiController
 
   def update
     if update_article
-      render json: {success: true, message: "Update successful", data: @article }, status: :ok
+      render json: {success: true, message: "Update successful", data: @article}, status: :ok
     else
       validation_errors = @article.errors.full_messages
       render json: {success: false, message: "Update fail", errors: validation_errors}, status: :ok
@@ -58,22 +58,18 @@ class Api::V1::Users::ArticlesController < ApiController
   def update_article
     old_categories = @article.categories
     @article.categories = category_list
-    
+
     return true if @article.update article_params.except :categories
-    
+
     @article.categories = old_categories
-    return false
+    false
   end
 
   def category_list
     categories = []
     article_params["categories"].each do |item|
       category = Category.find_by name: item["name"].downcase
-      if category
-        categories << category
-      else
-        categories << Category.new(name: item["name"].downcase)
-      end
+      categories << (category || Category.new(name: item["name"].downcase))
     end
     categories
   end
