@@ -11,6 +11,9 @@ Rails.application.routes.draw do
         resources :articles, only: [:index, :show, :destroy, :create, :update]
         resources :categories, only: [:index]
       end
+      namespace :article do
+        resources :comments, only: [:index, :destroy, :create, :update]
+      end
     end
   end
 end

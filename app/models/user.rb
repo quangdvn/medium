@@ -3,6 +3,7 @@ class User < ApplicationRecord
   USER_CREATE_PARAMS = %i(user_name email password password_confirmation gender age).freeze
 
   has_many :articles, foreign_key: :author_id, primary_key: :id, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :user_name, presence: true,
     length: {minimum: Settings.validations.user.name_minlength,
