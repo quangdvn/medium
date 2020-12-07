@@ -76,6 +76,14 @@ ActiveRecord::Schema.define(version: 2020_12_07_170953) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "suggestions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "suggest_id"
+    t.bigint "article_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_suggestions_on_article_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "user_name"
     t.string "email"
@@ -90,4 +98,5 @@ ActiveRecord::Schema.define(version: 2020_12_07_170953) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users", column: "author_id"
+  add_foreign_key "suggestions", "articles"
 end

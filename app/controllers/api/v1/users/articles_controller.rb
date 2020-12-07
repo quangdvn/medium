@@ -18,6 +18,26 @@ class Api::V1::Users::ArticlesController < ApiController
   end
 
   def show
+
+    data_set = []
+
+    Article.all.each do |article|
+      data = article.title
+
+      data_set << data
+    end
+
+    url = 'http://95ddcc997d1a.ngrok.io'
+
+    res = Faraday.post(url) do |req|
+      req.headers['Content-Type'] = 'application/json'
+      req.body = {query: @article.title, data: data_set}.to_json
+    end
+    
+    result = JSON.parse(res.body)['result'] if res
+
+    byebug
+
     render :show, status: :ok
   end
 

@@ -1,13 +1,14 @@
 source "https://rubygems.org"
 git_source(:github){|repo| "https://github.com/#{repo}.git"}
 
-ruby "2.7.1"
+ruby "2.7.0"
 
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "config"
 gem "dotenv-rails"
 gem "faker", "~> 2.14"
+gem 'faraday', '~> 0.9.2'
 gem "http_accept_language", "~> 2.0", ">= 2.0.5"
 gem "jbuilder"
 gem "jwt"

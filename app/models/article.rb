@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  include Rails.application.routes.url_helpers
   belongs_to :author, class_name: User.name, foreign_key: :author_id
   has_and_belongs_to_many :categories
   accepts_nested_attributes_for :categories
