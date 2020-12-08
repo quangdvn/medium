@@ -5,8 +5,11 @@ class Api::V1::Users::ArticlesController < ApiController
   before_action :new_article, only: :create
 
   def index
-    @articles = Article.all
-
+    @articles = if params[:suggest_id]
+                  Article.suggestion params[:suggest_id]
+                else
+                  Article.all.order_by_updated
+                end
     if @articles
       render :index, status: :ok
     else
@@ -67,7 +70,7 @@ class Api::V1::Users::ArticlesController < ApiController
 
   def category_list
     categories = []
-    article_params["categories"].each do |item|
+    ActiveSupport::JSON.decode(article_params["categories"]).each do |item|
       category = Category.find_by name: item["name"].downcase
       categories << (category || Category.new(name: item["name"].downcase))
     end

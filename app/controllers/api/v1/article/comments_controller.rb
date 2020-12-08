@@ -3,7 +3,7 @@ class Api::V1::Article::CommentsController < ApiController
   before_action :correct_user, only: [:destroy, :update]
 
   def index
-    @comments = Comment.get_comment_by_articles(params[:id])
+    @comments = Comment.get_comment_by_articles(params[:id]).order_by_updated
 
     if @comments
       render :index, status: :ok

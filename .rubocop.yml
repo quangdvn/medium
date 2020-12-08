@@ -28,6 +28,7 @@ AllCops:
     - "spec/**/*"
     - "script/rails"
     - "config/**/*"
+    - "app/models/article.rb"
     - "app/views/layouts/*"
     - "app/views/user_mailer/*"
     - "app/views/booking_mailer/*"

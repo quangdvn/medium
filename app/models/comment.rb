@@ -4,7 +4,8 @@ class Comment < ApplicationRecord
 
   COMMENT_PARAMS = [:detail, :article_id].freeze
 
-  scope :get_comment_by_articles, ->(article_id){where(article_id: article_id)}
+  scope :get_comment_by_articles, ->(article_id){where article_id: article_id}
+  scope :order_by_updated, ->{order updated_at: :desc}
 
   validates :detail, presence: true, length: {minimum: 1, maximum: 5000}
 end

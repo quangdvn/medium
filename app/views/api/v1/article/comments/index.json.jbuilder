@@ -7,6 +7,6 @@ json.data do
     json.user_id comment.user_id
     json.user User.find_by(id: comment.user_id).user_name
     json.article_id comment.article_id
-    json.created_at comment.created_at
+    json.updated_at comment.updated_at
   end
 end
