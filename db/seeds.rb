@@ -46,18 +46,30 @@ Category.create(name: "networking")
 
 Category.create(name: "devops")
 
-# 50.times do |n|
-#   title = Faker::Quote.famous_last_words
-#   detail = Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10))
-#   author_id = rand(1...6)
-#   category_id = rand(1...6)
+article = Article.create(title: Faker::Quote.famous_last_words,
+  detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
+  author_id: 3,
+  categories: [Category.find(1), Category.find(2), Category.find(3), Category.find(4)])
 
-#   Article.create(title: title,
-#     detail: detail,
-#     author_id: author_id,
-#     category_id: [{
-#       name: "Web"
-#     }, {
-#       name: "Rails"
-#     }])
-# end
+article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/1.jpg')), filename: "1.jpg")
+
+article = Article.create(title: Faker::Quote.famous_last_words,
+  detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
+  author_id: 2,
+  categories: [Category.find(1), Category.find(4)])
+
+article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/2.png')), filename: "2.png")
+
+article = Article.create(title: Faker::Quote.famous_last_words,
+  detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
+  author_id: 1,
+  categories: [Category.find(2)])
+
+article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/3.jpg')), filename: "3.jpg")
+
+article = Article.create(title: Faker::Quote.famous_last_words,
+  detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
+  author_id: 4,
+  categories: [Category.find(3), Category.find(4), Category.find(1)])
+
+article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/4.jpg')), filename: "4.jpg")
