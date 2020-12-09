@@ -64,8 +64,8 @@ GEM
       rspec (~> 3.8)
     ast (2.4.1)
     aws-eventstream (1.1.0)
-    aws-partitions (1.402.0)
-    aws-sdk-core (3.109.3)
+    aws-partitions (1.404.0)
+    aws-sdk-core (3.110.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
@@ -87,7 +87,7 @@ GEM
     code_analyzer (0.5.2)
       sexp_processor
     concurrent-ruby (1.1.7)
-    config (2.2.1)
+    config (2.2.2)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
     crass (1.0.6)
@@ -135,7 +135,7 @@ GEM
       dry-equalizer (~> 0.3)
       dry-inflector (~> 0.1, >= 0.1.2)
       dry-logic (~> 1.0, >= 1.0.2)
-    dry-validation (1.5.6)
+    dry-validation (1.6.0)
       concurrent-ruby (~> 1.0)
       dry-container (~> 0.7, >= 0.7.1)
       dry-core (~> 0.4)
@@ -374,7 +374,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 2.7.1p83
 
 BUNDLED WITH
    2.1.4
