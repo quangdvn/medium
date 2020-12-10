@@ -1,6 +1,6 @@
 class Api::V1::Article::SuggestionsController < ApiController
   def index
-    url = "http://4accab66b220.ngrok.io/suggest_article"
+    url = "http://4252beec7086.ngrok.io/suggest_article"
 
     @article = Article.find_by id: params[:id]
     data_set = []
@@ -20,6 +20,14 @@ class Api::V1::Article::SuggestionsController < ApiController
 
     result = JSON.parse(res.body)["result"]
 
-    render json: {success: true, result: result}
+    @articles_suggest = []
+
+    result.each do |title|
+      @article_suggest = Article.find_by title: title
+
+      @articles_suggest << @article_suggest
+    end
+
+    render :index, status: :ok
   end
 end
