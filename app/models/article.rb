@@ -4,6 +4,7 @@ class Article < ApplicationRecord
   has_and_belongs_to_many :categories
   accepts_nested_attributes_for :categories
   has_many :comments, dependent: :destroy
+  has_many :suggestions
   has_one_attached :featured_image
 
   ARTICLE_PARAMS = [:title, :detail, :featured_image, :categories].freeze

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
       namespace :article do
         resources :comments, only: [:index, :destroy, :create, :update]
+        get '/suggestion', to: 'suggestions#index'
       end
     end
   end
