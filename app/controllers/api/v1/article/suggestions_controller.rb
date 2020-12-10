@@ -25,7 +25,7 @@ class Api::V1::Article::SuggestionsController < ApiController
     result.each do |title|
       @article_suggest = Article.find_by title: title
 
-      @articles_suggest << @article_suggest
+      @articles_suggest << @article_suggest if @article_suggest != @article
     end
 
     render :index, status: :ok
