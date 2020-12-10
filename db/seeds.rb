@@ -46,6 +46,7 @@ Category.create(name: "networking")
 
 Category.create(name: "devops")
 
+##### 1 ######
 article = Article.create(title: Faker::Quote.famous_last_words,
   detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
   author_id: 3,
@@ -53,6 +54,7 @@ article = Article.create(title: Faker::Quote.famous_last_words,
 
 article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/1.jpg')), filename: "1.jpg")
 
+##### 2 ######
 article = Article.create(title: Faker::Quote.famous_last_words,
   detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
   author_id: 2,
@@ -60,6 +62,7 @@ article = Article.create(title: Faker::Quote.famous_last_words,
 
 article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/2.png')), filename: "2.png")
 
+##### 3 ######
 article = Article.create(title: Faker::Quote.famous_last_words,
   detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
   author_id: 1,
@@ -67,9 +70,42 @@ article = Article.create(title: Faker::Quote.famous_last_words,
 
 article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/3.jpg')), filename: "3.jpg")
 
+##### 4 ######
 article = Article.create(title: Faker::Quote.famous_last_words,
   detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
   author_id: 4,
   categories: [Category.find(3), Category.find(4), Category.find(1)])
+
+article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/4.jpg')), filename: "4.jpg")
+
+##### 5 ######
+article = Article.create(title: Faker::Quote.famous_last_words,
+  detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
+  author_id: rand(1...4),
+  categories: [Category.find(3), Category.find(4), Category.find(2)])
+
+article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/1.jpg')), filename: "1.jpg")
+
+##### 6 ######
+article = Article.create(title: Faker::Quote.famous_last_words,
+  detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
+  author_id: rand(1...4),
+  categories: [Category.find(3), Category.find(4), Category.find(1), Category.find(2)])
+
+article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/2.png')), filename: "2.png")
+
+##### 7 ######
+article = Article.create(title: Faker::Quote.famous_last_words,
+  detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
+  author_id: rand(1...4),
+  categories: [Category.find(3), Category.find(4), Category.find(1), Category.find(6), Category.find(5)])
+
+article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/3.jpg')), filename: "3.jpg")
+
+##### 8 ######
+article = Article.create(title: Faker::Quote.famous_last_words,
+  detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
+  author_id: rand(1...4),
+  categories: [Category.find(4), Category.find(2), Category.find(6)])
 
 article.featured_image.attach(io: File.open(File.join(Rails.root, 'app/assets/images/4.jpg')), filename: "4.jpg")
