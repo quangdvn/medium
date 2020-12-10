@@ -8,7 +8,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "config"
 gem "dotenv-rails"
 gem "faker", "~> 2.14"
-gem 'faraday', '~> 0.9.2'
+gem "faraday", "~> 0.9.2"
 gem "http_accept_language", "~> 2.0", ">= 2.0.5"
 gem "jbuilder"
 gem "jwt"
