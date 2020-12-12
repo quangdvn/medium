@@ -26,7 +26,7 @@ class Api::V1::Users::ArticlesController < ApiController
       render json: {success: true, message: "Create successful", data: @article}, status: :ok
     else
       validation_errors = @article.errors.full_messages
-      render json: {success: false, message: "Create fail", errors: validation_errors}, status: :ok
+      render json: {success: false, message: "Create fail", errors: validation_errors}, status: :bad_request
     end
   end
 
@@ -35,7 +35,7 @@ class Api::V1::Users::ArticlesController < ApiController
       render json: {success: true, message: "Update successful", data: @article}, status: :ok
     else
       validation_errors = @article.errors.full_messages
-      render json: {success: false, message: "Update fail", errors: validation_errors}, status: :ok
+      render json: {success: false, message: "Update fail", errors: validation_errors}, status: :bad_request
     end
   end
 
