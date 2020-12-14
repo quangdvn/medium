@@ -5,10 +5,14 @@ class Api::V1::Users::ArticlesController < ApiController
   before_action :new_article, only: :create
 
   def index
+    @pagination = false
     @articles = if params[:suggest_id]
                   Article.suggestion params[:suggest_id]
+                elsif params[:page]
+                  @pagination = true
+                  Article.all.page params[:page]
                 else
-                  Article.all.order_by_updated
+                  Article.all
                 end
     if @articles
       render :index, status: :ok

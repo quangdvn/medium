@@ -13,7 +13,10 @@ Rails.application.routes.draw do
       end
       namespace :article do
         resources :comments, only: [:index, :destroy, :create, :update]
-        get '/suggestion', to: 'suggestions#index'
+        get "/suggestion", to: "suggestions#index"
+        resources :likes, only: [:index]
+        delete ":article_id/likes", to: "likes#destroy"
+        post ":article_id/likes", to: "likes#create"
       end
     end
   end

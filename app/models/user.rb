@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :articles, foreign_key: :author_id, primary_key: :id, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   validates :user_name, presence: true,
     length: {minimum: Settings.validations.user.name_minlength,
