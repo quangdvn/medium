@@ -1,7 +1,6 @@
 class Api::V1::Article::LikesController < ApiController
   before_action :authenticate_token!, only: [:index, :create, :destroy]
   before_action :load_like, only: [:destroy, :create]
-  before_action :is_owned?, only: [:create]
 
   def index
     @liked_articles = Article.get_all_likes(@current_user.id).order_likes
@@ -14,11 +13,6 @@ class Api::V1::Article::LikesController < ApiController
       render json: {
         success: false,
         message: "You have already liked"
-      }, status: :bad_request
-    elsif @unmarkable
-      render json: {
-        success: false,
-        message: "You can't like your article"
       }, status: :bad_request
     else
       like = Like.create user_id: @current_user.id, article_id: params[:article_id]
@@ -59,11 +53,5 @@ class Api::V1::Article::LikesController < ApiController
   def get_author article_id
     article = Article.find_by id: article_id
     article.author.try(:id)
-  end
-
-  def is_owned?
-    @unmarkable = false
-    cur_author = get_author params[:article_id]
-    @unmarkable = true if @current_user.id == cur_author
   end
 end

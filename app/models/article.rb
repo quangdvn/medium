@@ -14,9 +14,10 @@ class Article < ApplicationRecord
   validates :detail, presence: true, length: {maximum: 5000}
 
   scope :order_by_updated, ->{order updated_at: :desc}
-  scope :suggestion, ->(article_id){ joins("INNER JOIN articles_categories ON articles_categories.article_id = articles.id")
+  scope :order_by_likes, ->{ left_joins(:likes).group("articles.id").order("count(articles.id) DESC, user_id DESC") }
+  scope :suggestion, ->(article_id){ joins("JOIN articles_categories ON articles_categories.article_id = articles.id")
                          .where("articles_categories.category_id in (
-                                select category_id from articles_categories where article_id = ?) and article_id != ?",article_id, article_id)
+                                select category_id from articles_categories where article_id = ?) and article_id != ?", article_id, article_id)
                          .group("articles.id")
                          .order("count(articles.id) DESC, articles.updated_at DESC")
                          .limit(5) }
@@ -24,4 +25,16 @@ class Article < ApplicationRecord
   scope :order_likes, ->{order("likes.created_at DESC")}
 
   paginates_per 3
+
+  class << self
+    def send_chain methods
+      methods.inject(self) do |relation, method|
+        if method[:params]
+          relation.send method[:name], method[:params]
+        else
+          relation.send method[:name]
+        end
+      end
+    end
+  end
 end
