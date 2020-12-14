@@ -17,7 +17,5 @@ json.data do
       json.name category.name
     end
   end
-  if @pagination
-    json.partial! "api/v1/shared/pagination", collection: @articles
-  end
+  json.partial! "api/v1/shared/pagination", collection: @articles if @pagination
 end

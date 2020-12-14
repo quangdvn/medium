@@ -5,11 +5,11 @@ class Api::V1::Users::ArticlesController < ApiController
   before_action :new_article, only: :create
 
   def index
-    @pagination = params.has_key? :page
-    scope_chain = [{ name: :all } ]
-    scope_chain << { name: :order_by_likes } if params[:most_liked]
-    scope_chain << { name: :order_by_updated }
-    scope_chain << { name: :page, params: [params[:page]] } if params[:page]
+    @pagination = params.key? :page
+    scope_chain = [{name: :all}]
+    scope_chain << {name: :order_by_likes} if params[:most_liked]
+    scope_chain << {name: :order_by_updated}
+    scope_chain << {name: :page, params: [params[:page]]} if params[:page]
 
     @articles = if params[:suggest_id]
                   Article.suggestion params[:suggest_id]
