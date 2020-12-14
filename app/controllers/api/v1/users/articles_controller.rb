@@ -9,7 +9,7 @@ class Api::V1::Users::ArticlesController < ApiController
     scope_chain = [{name: :all}]
     scope_chain << {name: :order_by_likes} if params[:most_liked]
     scope_chain << {name: :order_by_updated}
-    scope_chain << {name: :page, params: [params[:page]]} if params[:page]
+    scope_chain << {name: :page, param: params[:page]} if params[:page]
 
     @articles = if params[:suggest_id]
                   Article.suggestion params[:suggest_id]

@@ -29,8 +29,8 @@ class Article < ApplicationRecord
   class << self
     def send_chain methods
       methods.inject(self) do |relation, method|
-        if method[:params]
-          relation.send method[:name], method[:params]
+        if method[:param]
+          relation.send method[:name], method[:param]
         else
           relation.send method[:name]
         end
