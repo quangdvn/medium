@@ -39,9 +39,9 @@ categories = []
   categories << Category.find(index + 1)
 end
 
-10.times do |index|
+15.times do |index|
   article = Article.create(title: Faker::Quote.famous_last_words,
-  detail: Faker::Lorem.paragraph(sentence_count: rand(10...20), supplemental: true, random_sentences_to_add: rand(5..10)),
+  detail: Faker::Lorem.paragraph(sentence_count: rand(30...40), supplemental: true, random_sentences_to_add: rand(5..10)),
   author_id: 1 + rand(4),
   categories: categories.sample(1 + rand(4)))
 

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
         delete ":article_id/likes", to: "likes#destroy"
         post ":article_id/likes", to: "likes#create"
       end
-      resources :users, only: :show
+      resources :users, only: [:index, :show]
     end
   end
 end

@@ -38,6 +38,8 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  scope :order_by_articles, ->{joins(:articles).group("users.id").order("count(users.id) DESC").limit(5)}
+
   private
 
   def downcase_email

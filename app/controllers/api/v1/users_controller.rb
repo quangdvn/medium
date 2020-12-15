@@ -1,6 +1,15 @@
 class Api::V1::UsersController < ApiController
   before_action :authenticate_token!, only: :update
 
+  def index
+    @users = User.all.order_by_articles
+    if @users
+      render :index, status: :ok
+    else
+      render json: {success: false, message: "Fail to load users"}, status: :bad_request
+    end
+  end
+
   def create
     @user = User.create user_create_params
 

@@ -25,7 +25,7 @@ class Article < ApplicationRecord
   scope :get_all_likes, ->(user_id){joins(:likes).where("likes.user_id = ?", user_id)}
   scope :order_likes, ->{order("likes.created_at DESC")}
 
-  paginates_per 3
+  paginates_per 5
 
   class << self
     def send_chain methods
