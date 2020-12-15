@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApiController
+  before_action :authenticate_token!, only: :update
+
   def create
     @user = User.create user_create_params
 
@@ -7,7 +9,17 @@ class Api::V1::UsersController < ApiController
       render :create, status: :ok
     else
       validation_errors = @user.errors.full_messages
-      render json: {success: false, message: "Unable to create this Account", errors: validation_errors},
+      render json: {success: false, message: "Unable to create this account.", errors: validation_errors},
+              status: :bad_request
+    end
+  end
+
+  def update
+    if @current_user.update user_update_params
+      render :update, status: :ok
+    else
+      validation_errors = @user.errors.full_messages
+      render json: {success: false, message: "Unable to update this account.", errors: validation_errors},
               status: :bad_request
     end
   end
@@ -16,5 +28,9 @@ class Api::V1::UsersController < ApiController
 
   def user_create_params
     params.permit User::USER_CREATE_PARAMS
+  end
+
+  def user_update_params
+    params.permit User::USER_UPDATE_PARAMS
   end
 end

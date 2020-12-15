@@ -6,5 +6,6 @@ validations:
     name_maxlength: 50
     email_minlength: 5
     email_maxlength: 255
+    bio_maxlength: 500
     password_minlength: 6
     password_maxlength: 15

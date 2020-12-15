@@ -1,10 +1,12 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX = Settings.validations.user.email_regex
   USER_CREATE_PARAMS = %i(user_name email password password_confirmation gender age).freeze
+  USER_UPDATE_PARAMS = %i(user_name email bio gender age avatar).freeze
 
   has_many :articles, foreign_key: :author_id, primary_key: :id, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_one_attached :avatar
 
   validates :user_name, presence: true,
     length: {minimum: Settings.validations.user.name_minlength,
@@ -20,6 +22,9 @@ class User < ApplicationRecord
     length: {minimum: Settings.validations.user.password_minlength,
              maximum: Settings.validations.user.password_maxlength},
     allow_nil: true
+
+  validates :bio, allow_nil: true,
+    length: {maximum: Settings.validations.user.bio_maxlength}
 
   validates :is_admin, inclusion: [true, false]
 
