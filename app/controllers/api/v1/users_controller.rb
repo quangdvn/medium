@@ -24,6 +24,15 @@ class Api::V1::UsersController < ApiController
     end
   end
 
+  def show
+    @user = User.find_by id: params[:id]
+    if @user
+      render :show, status: :ok
+    else
+      render json: {success: false, message: "User not found"}, status: :not_found
+    end
+  end
+
   private
 
   def user_create_params

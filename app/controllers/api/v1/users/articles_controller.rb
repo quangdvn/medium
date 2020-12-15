@@ -8,6 +8,7 @@ class Api::V1::Users::ArticlesController < ApiController
     @pagination = params.key? :page
     scope_chain = [{name: :all}]
     scope_chain << {name: :order_by_likes} if params[:most_liked]
+    scope_chain << {name: :from_author, param: params[:author_id]} if params[:author_id]
     scope_chain << {name: :order_by_updated}
     scope_chain << {name: :page, param: params[:page]} if params[:page]
 
