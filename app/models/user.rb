@@ -32,7 +32,7 @@ class User < ApplicationRecord
             numericality: {only_integer: true, greater_than_or_equal_to: Settings.validations.user.min_age}
 
   validates :gender, allow_nil: true, numericality: {only_integer: true},
-            inclusion: {in: [1, 2]}
+            inclusion: {in: [0, 1, 2]}
 
   before_save :downcase_email
 

@@ -27,7 +27,7 @@ class Api::V1::UsersController < ApiController
     if @current_user.update user_update_params
       render :update, status: :ok
     else
-      validation_errors = @user.errors.full_messages
+      validation_errors = @current_user.errors.full_messages
       render json: {success: false, message: "Unable to update this account.", errors: validation_errors},
               status: :bad_request
     end
